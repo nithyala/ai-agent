@@ -24,7 +24,7 @@ agent = Agent(
             uri="tmp/lancedb",
             table_name="recipes",
             search_type=SearchType.hybrid,
-            embedder=OpenAIEmbedder(id="text-embedding-3-small"),
+            embedder=OpenAIEmbedder(id="text-embedding-3-small", api_key=openai_api_key),
         ),
     ),
     tools=[DuckDuckGoTools()],
