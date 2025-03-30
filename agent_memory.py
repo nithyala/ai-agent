@@ -58,10 +58,9 @@ except Exception as e:
 # ✅ User input
 query = st.text_input("Ask a Thai food question:")
 
-# ✅ Handle response
 if query:
     try:
-        response = agent.chat(query)
+        response = agent(query)
         st.markdown(response)
     except Exception as e:
         st.error(f"⚠️ Error during response: {e}")
