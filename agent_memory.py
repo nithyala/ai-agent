@@ -8,11 +8,9 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-open_ai=os.environ["OPENAI_API_KEY"]
+open_ai=test
 # App title
-if not os.environ.get("OPENAI_API_KEY"):
-    st.error("❌ OpenAI API key not found. Please check your environment settings.")
-    st.stop()
+
 # ✅ App title
 import streamlit as st
 
