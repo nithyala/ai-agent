@@ -8,7 +8,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-os.environ["OPENAI_API_KEY"]=os.getenv("OPENAI_API_KEY")
+os.environ["OPENAI_API_KEY"]="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"
 
 agent = Agent(
     model=OpenAIChat(id="gpt-4o"),
