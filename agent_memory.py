@@ -10,6 +10,9 @@ load_dotenv()
 
 os.environ["OPENAI_API_KEY"]="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"
 # App title
+if not os.environ.get("OPENAI_API_KEY"):
+    st.error("❌ OpenAI API key not found. Please check your environment settings.")
+    st.stop()
 # ✅ App title
 import streamlit as st
 
