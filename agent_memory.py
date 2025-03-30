@@ -11,7 +11,10 @@ load_dotenv()
 os.environ["OPENAI_API_KEY"]="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"
 # App title
 # ✅ App title
+import streamlit as st
+
 st.title("🍜 Thai Cuisine Expert")
+
 
 # ✅ Show initial diagnostic message
 st.markdown("### 🛠️ App is running...")
