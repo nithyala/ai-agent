@@ -60,7 +60,7 @@ query = st.text_input("Ask a Thai food question:")
 
 if query:
     try:
-        response = agent.invoke(query)
+        response = agent.run(query)
         st.markdown(response)
     except Exception as e:
         st.error(f"⚠️ Error during response: {e}")
