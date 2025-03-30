@@ -9,9 +9,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 os.environ["OPENAI_API_KEY"]="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"
-
+openai_api_key = os.getenv("OPENAI_API_KEY")
 agent = Agent(
-    model=OpenAIChat(id="gpt-4o"),
+    model=OpenAIChat(id="gpt-4o", api_key=openai_api_key),
     description="You are a Thai cuisine expert!",
     instructions=[
         "Search your knowledge base for Thai recipes.",
