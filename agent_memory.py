@@ -8,7 +8,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-os.environ["OPENAI_API_KEY"]="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"
+os.environ["OPENAI_API_KEY"]="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"
 # App title
 if not os.environ.get("OPENAI_API_KEY"):
     st.error("❌ OpenAI API key not found. Please check your environment settings.")
