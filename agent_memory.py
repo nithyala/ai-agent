@@ -8,7 +8,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-os.environ["OPENAI_API_KEY"]="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"
+os.environ["OPENAI_API_KEY"]="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"
 # App title
 # ✅ App title
 import streamlit as st
