@@ -10,15 +10,16 @@ load_dotenv()
 
 os.environ["OPENAI_API_KEY"]="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"
 # App title
+# ✅ App title
 st.title("🍜 Thai Cuisine Expert")
 
-# Diagnostic message
+# ✅ Show initial diagnostic message
 st.markdown("### 🛠️ App is running...")
 
-# Create LanceDB directory
+# ✅ Ensure LanceDB directory exists
 os.makedirs("tmp/lancedb", exist_ok=True)
 
-# Load Agent inside a try block to catch errors
+# ✅ Load Agent inside try block
 try:
     agent = Agent(
         model=OpenAIChat(id="gpt-4o"),
@@ -45,15 +46,16 @@ try:
     if agent.knowledge is not None:
         agent.knowledge.load()
 
-    st.markdown("✅ Agent loaded successfully!")
+    st.success("✅ Agent loaded successfully!")
 
 except Exception as e:
     st.error(f"⚠️ Error loading agent: {e}")
+    st.stop()  # Stop execution if agent fails to load
 
-# User input box
+# ✅ User input
 query = st.text_input("Ask a Thai food question:")
 
-# Handle query and display result
+# ✅ Handle response
 if query:
     try:
         response = agent.chat(query)
