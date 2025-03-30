@@ -1,4 +1,4 @@
-agno
+git+https://github.com/nithyala/agno.git
 openai
 python-dotenv
 duckduckgo-search
