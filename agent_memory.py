@@ -1,3 +1,4 @@
+import streamlit as st
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 from agno.embedder.openai import OpenAIEmbedder
@@ -6,25 +7,13 @@ from agno.knowledge.pdf_url import PDFUrlKnowledgeBase
 from agno.vectordb.lancedb import LanceDb, SearchType
 import os
 from dotenv import load_dotenv
+
+# Load environment variables
 load_dotenv()
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
-open_ai=test
-# App title
-
-# ✅ App title
-import streamlit as st
-
-st.title("🍜 Thai Cuisine Expert")
-
-
-# ✅ Show initial diagnostic message
-st.markdown("### 🛠️ App is running...")
-
-# ✅ Ensure LanceDB directory exists
-os.makedirs("tmp/lancedb", exist_ok=True)
-
-# ✅ Load Agent inside try block
-try:
+@st.cache_resource
+def setup_agent():
     agent = Agent(
         model=OpenAIChat(id="gpt-4o"),
         description="You are a Thai cuisine expert!",
@@ -50,26 +39,18 @@ try:
     if agent.knowledge is not None:
         agent.knowledge.load()
 
-    st.success("✅ Agent loaded successfully!")
+    return agent
 
-except Exception as e:
-    st.error(f"⚠️ Error loading agent: {e}")
-    st.stop()  # Stop execution if agent fails to load
+agent = setup_agent()
 
-# ✅ User input
-query = st.text_input("Ask a Thai food question:")
-if query:
-    try:
-        # Check what .run() returns
-        response = agent.run(query)
-        st.write("🧪 Raw response type:", type(response))
-        st.write("🧪 Raw response content:", response)
+# Streamlit UI
+st.set_page_config(page_title="Thai Cuisine Expert", page_icon="🍜")
+st.title("🍜 Thai Cuisine Expert")
+st.write("Ask anything about Thai recipes or Thai food history!")
 
-        # Try rendering nicely if it's a dict with 'output'
-        if isinstance(response, dict) and "output" in response:
-            st.markdown(response["output"])
-        else:
-            st.markdown(str(response))
+user_query = st.text_input("Your question:")
 
-    except Exception as e:
-        st.error(f"⚠️ Error during response: {e}")
+if user_query:
+    with st.spinner("Thinking..."):
+        response = agent.get_response(user_query)
+        st.markdown(response)
