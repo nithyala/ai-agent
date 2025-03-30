@@ -57,10 +57,18 @@ except Exception as e:
 
 # ✅ User input
 query = st.text_input("Ask a Thai food question:")
-
 if query:
     try:
+        # Check what .run() returns
         response = agent.run(query)
-        st.markdown(response)
+        st.write("🧪 Raw response type:", type(response))
+        st.write("🧪 Raw response content:", response)
+
+        # Try rendering nicely if it's a dict with 'output'
+        if isinstance(response, dict) and "output" in response:
+            st.markdown(response["output"])
+        else:
+            st.markdown(str(response))
+
     except Exception as e:
         st.error(f"⚠️ Error during response: {e}")
